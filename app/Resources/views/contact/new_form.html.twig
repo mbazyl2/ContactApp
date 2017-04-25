@@ -1,0 +1,9 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <form action="{{ path("app_contact_createcontact") }}" method="POST">
+        <div><label>Name: <input name="name" type="text"></label></div>
+        <div><label>Surname: <input name="surname" type="text"></label></div>
+        <div><label>Nickname: <input name="nickname" type="text"></label></div>
+        <div><input type="submit" value="Add"></div>
+    </form>
+{% endblock %}
