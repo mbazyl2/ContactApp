@@ -22,7 +22,7 @@ class ContactController extends Controller
     }
 
     /**
-     * @Route("/new")
+     * @Route("/contact/new/")
      * @Template(":contact:new_form.html.twig")
      * @Method("GET")
      */
@@ -32,7 +32,7 @@ class ContactController extends Controller
     }
 
     /**
-     * @Route("/create")
+     * @Route("/contact/create/")
      * @Template("::base.html.twig")
      * @Method("POST")
      */
@@ -51,4 +51,28 @@ class ContactController extends Controller
         return [];
         // narazie nie jest zwracane nic, ale akcja ta, po dodaniu obiektu do bazy bedzie przekierowywac do wyswietlenia dodanego kontaktu lub wszystkich kontaktow
     }
+
+    /**
+     * @Route("/contact/show/{id}")
+     * @Template(":contact:show_single_contact.html.twig")
+     */
+    public function showSingleContactAction($id)    //akcja wyswietlajaca pojednyczy kontakt o id przekazanym w slugu
+    {
+        $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")->find($id);
+        if(!$contact){
+            throw $this->createNotFoundException("Contact with id $id does not exists");
+        }
+        return ["contact"=>$contact]; // akcja zwraca kontak, ktorego poszczegolne atrybuty sa wyswietlane w widoku
+    }
+
+    /**
+     * @Route("/contact/showAll/")
+     * @Template(":contact:show_all_contacts.html.twig")
+     */
+    public function showAllContactsAction()     //akcja wyswietlajaca wszystkie kontakty
+    {
+        $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
+        return ["contacts" => $contact];    //zwraca tablice kontaktow (w zwiazku z tym nie trzeba sprawdzac czy istnieja jakies kontakty)
+    }
+
 }

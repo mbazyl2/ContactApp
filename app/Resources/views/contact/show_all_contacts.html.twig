@@ -1,0 +1,8 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% for contact in contacts %}
+        <h1>{{ contact.name }} {{ contact.surname }}</h1>
+        <p>{{ contact.nickname }}</p>
+    {% endfor %}
+{% endblock %}
