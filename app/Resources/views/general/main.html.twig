@@ -1,5 +1,14 @@
 {% extends "::base.html.twig" %}
+
+   {% block title %} ContacApp! {% endblock %}
+
+    {% block stylesheets %} {{ parent() }} {% endblock %}
+
 {% block body %}
+
+    {% block button %}
+        <form align="center" action="{{ path('app_contact_showallcontacts') }}"><input type="submit" value="Pokaż wsystkie kontakty"></form>
+    {% endblock%}
 
     {% block head %}
         <p align="center"> Strona główna aplikacji <b>ContactApp</b></p>
