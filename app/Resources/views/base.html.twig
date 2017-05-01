@@ -6,8 +6,20 @@
         {% block stylesheets %}<link rel="Stylesheet" type="text/css" href={#{{asset('bundles/framework/css/main.css')}}#}/>{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
+    <header>
+    {% block header %}
+        <p align="center"> ________________________________________________________________________________________________ </p>
+    {% endblock %}
+    </header>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
+    <footer>
+    {% block footer %}
+        <p align="center"> ________________________________________________________________________________________________ </p>
+    {% endblock%}
+    </footer>
+
 </html>

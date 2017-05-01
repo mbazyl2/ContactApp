@@ -21,7 +21,7 @@ class ContactController extends Controller
      */
     public function indexAction()
     {
-        return new Response("Contact indexAction Controller");
+        return $this->redirectToRoute("app_general_welcome");
     }
 
     /**
@@ -51,8 +51,8 @@ class ContactController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($contact);
         $em->flush();
-        return [];
-        // narazie nie jest zwracane nic, ale akcja ta, po dodaniu obiektu do bazy bedzie przekierowywac do wyswietlenia dodanego kontaktu lub wszystkich kontaktow
+        return $this->redirectToRoute("app_contact_showallcontacts");
+
     }
 
     /**

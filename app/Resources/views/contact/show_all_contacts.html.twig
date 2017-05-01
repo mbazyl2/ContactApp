@@ -1,14 +1,36 @@
 {% extends "::base.html.twig" %}
 
+
 {% block body %}
+    <h2 align="center"> List of all Your contacts :</h2>
+    <br>
+    <br>
     {% for contact in contacts %}
-        <h1>{{ contact.name }} {{ contact.surname }}     </h1>
-        <p>
+        <p align="center"> _*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_ </p>
+        <h3 align="center">{{ contact.name }} {{ contact.surname }}     </h3>
+        <p align="center">
             {{ contact.nickname }}
-            <form action="{{ path('app_contact_deletecontact', {"id":contact.id}) }}" method="POST">
-                <input name="_method" type="hidden" value="DELETE">
-                <input type="submit" value="Delete">
-             </form>
         </p>
+
+            <div>
+                <span>
+                    <form align="center" action="{{ path('app_contact_deletecontact', {"id":contact.id}) }}" method="POST">
+                        <input name="_method" type="hidden" value="DELETE">
+                        <input style="background-color: #C82829" type="submit" value="Delete">
+                     </form>
+               </span>
+               <span>
+                    <form align="center" action="{{ path("app_contact_showsinglecontact", {"id":contact.id}) }}">
+                        <input type="submit" value="Show contact details">
+                    </form>
+                </span>
+        </div>
+
     {% endfor %}
+    <p>
+    <br>
+        <form align="center" action="{{ path('app_general_welcome') }}">
+            <input style="background-color: cadetblue; font-weight: bold" type="submit" value="Main Page">
+        </form>
+    </p>
 {% endblock %}

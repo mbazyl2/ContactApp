@@ -1,9 +1,18 @@
 {% extends "::base.html.twig" %}
 {% block body %}
+
     <form action="{{ path("app_contact_createcontact") }}" method="POST">
-        <div><label>Name: <input name="name" type="text"></label></div>
-        <div><label>Surname: <input name="surname" type="text"></label></div>
-        <div><label>Nickname: <input name="nickname" type="text"></label></div>
-        <div><input type="submit" value="Add"></div>
+        <br>
+        <h3 align="center"> Please fill the form below to create new contact: </h3>
+        <br>
+        <div align="center"><label> Name: <input name="name" type="text"></label></div><br>
+        <div align="center"><label> Surname: <input name="surname" type="text"></label></div><br>
+        <div align="center"><label> Nickname: <input name="nickname" type="text"></label></div><br>
+        <div align="center"><input type="submit" value="Add"></div>
     </form>
+    <p>
+    <form align="center" action="{{ path('app_general_welcome') }}">
+        <input type="submit" value="Main Page">
+    </form>
+    </p>
 {% endblock %}

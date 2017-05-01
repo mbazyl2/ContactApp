@@ -1,6 +1,15 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>{{ contact.name }} {{ contact.surname }}</h1>
-        <p>{{ contact.nickname }}</p>
+    <h1 align="center">{{ contact.name }} {{ contact.surname }}</h1>
+        <p align="center">{{ contact.nickname }}</p>
+
+    <p>
+        <br>
+    <form align="center" action="{{ path('app_general_welcome') }}">
+        <input style="background-color: cadetblue; font-weight: bold" type="submit" value="Main Page">
+    </form>
+    </p>
 {% endblock %}
+
+

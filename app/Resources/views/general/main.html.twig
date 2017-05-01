@@ -1,26 +1,37 @@
 {% extends "::base.html.twig" %}
 
-   {% block title %} ContacApp! {% endblock %}
+    {% block title %} ContacApp! {% endblock %}
 
     {% block stylesheets %} {{ parent() }} {% endblock %}
 
-{% block body %}
+{% block header %}
 
-    {% block button %}
-        <form align="center" action="{{ path('app_contact_showallcontacts') }}"><input type="submit" value="Pokaż wsystkie kontakty"></form>
-    {% endblock%}
 
     {% block head %}
-        <p align="center"> Strona główna aplikacji <b>ContactApp</b></p>
+        <p align="center"> Main page of <b>ContactApp</b> - best place to store Your contacts ! </p>
     {% endblock %}
 
-    {% block random %}
-       <p align="center"> ten blok zwraca pierwszą zawartość przekazaną tablicą czyli string o wartości: " {{ empty }} " </p>
-    {% endblock %}
+    {% block button_add_new %}
+        <form align="center" action="{{ path('app_contact_newcontact') }}">
+        <input type="submit" value="Add new contact"></form>
+        <br>
+    {% endblock%}
+
+    {% block button_show_all %}
+        <form align="center" action="{{ path('app_contact_showallcontacts') }}">
+        <input type="submit" value="Show All contacts"></form>
+    {% endblock%}
+
+{% endblock %}
+
+{% block body %}
 
     {% block contacts %}
-        <h3 align="center"> Poniżej wyświetlane są wszystki kontakty :</h3>
         {{ include(':contact:show_all_contacts.html.twig') }}
     {% endblock %}
 
+
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
