@@ -78,4 +78,26 @@ class ContactController extends Controller
         return ["contacts" => $contact];    //zwraca tablice kontaktow (w zwiazku z tym nie trzeba sprawdzac czy istnieja jakies kontakty)
     }
 
+
+    /**
+     *@Route("/delete/{id}")
+     * @Method("DELETE")
+     */
+    public function deleteContactAction($id)
+    {
+        $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")->find($id);
+
+        if(!$contact){
+            throw  $this->createNotFoundException("Contact not found");
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($contact);
+        $em->flush();
+
+        return $this->redirectToRoute("app_contact_showallcontacts");
+
+    }
+
+
 }

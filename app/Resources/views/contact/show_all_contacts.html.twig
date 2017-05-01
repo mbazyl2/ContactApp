@@ -2,7 +2,13 @@
 
 {% block body %}
     {% for contact in contacts %}
-        <h1>{{ contact.name }} {{ contact.surname }}</h1>
-        <p>{{ contact.nickname }}</p>
+        <h1>{{ contact.name }} {{ contact.surname }}     </h1>
+        <p>
+            {{ contact.nickname }}
+            <form action="{{ path('app_contact_deletecontact', {"id":contact.id}) }}" method="POST">
+                <input name="_method" type="hidden" value="DELETE">
+                <input type="submit" value="Delete">
+             </form>
+        </p>
     {% endfor %}
 {% endblock %}

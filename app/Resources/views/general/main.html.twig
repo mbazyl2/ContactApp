@@ -20,9 +20,7 @@
 
     {% block contacts %}
         <h3 align="center"> Poniżej wyświetlane są wszystki kontakty :</h3>
-        {% for contact in contacts %}
-            <p align="center"> <strong>{{ contact.name }} {{ contact.surname }}</strong> vel. "{{ contact.nickname }}"</p>
-        {% endfor %}
+        {{ include(':contact:show_all_contacts.html.twig') }}
     {% endblock %}
 
 {% endblock %}
