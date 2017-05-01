@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/contact")
+ */
 class ContactController extends Controller
 {
     /**
@@ -18,11 +21,11 @@ class ContactController extends Controller
      */
     public function indexAction()
     {
-        return new Response("[]");
+        return new Response("Contact indexAction Controller");
     }
 
     /**
-     * @Route("/contact/new/")
+     * @Route("/new/")
      * @Template(":contact:new_form.html.twig")
      * @Method("GET")
      */
@@ -32,7 +35,7 @@ class ContactController extends Controller
     }
 
     /**
-     * @Route("/contact/create/")
+     * @Route("/create/")
      * @Template("::base.html.twig")
      * @Method("POST")
      */
@@ -53,7 +56,7 @@ class ContactController extends Controller
     }
 
     /**
-     * @Route("/contact/show/{id}")
+     * @Route("/show/{id}")
      * @Template(":contact:show_single_contact.html.twig")
      */
     public function showSingleContactAction($id)    //akcja wyswietlajaca pojednyczy kontakt o id przekazanym w slugu
@@ -66,7 +69,7 @@ class ContactController extends Controller
     }
 
     /**
-     * @Route("/contact/showAll/")
+     * @Route("/showAll/")
      * @Template(":contact:show_all_contacts.html.twig")
      */
     public function showAllContactsAction()     //akcja wyswietlajaca wszystkie kontakty

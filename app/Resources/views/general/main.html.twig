@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+
+    {% block head %}
+        <p align="center"> Strona główna aplikacji <b>ContactApp</b></p>
+    {% endblock %}
+
+    {% block random %}
+       <p align="center"> ten blok zwraca pierwszą zawartość przekazaną tablicą czyli string o wartości: " {{ empty }} " </p>
+    {% endblock %}
+
+    {% block contacts %}
+        <h3 align="center"> Poniżej wyświetlane są wszystki kontakty :</h3>
+        {% for contact in contacts %}
+            <p align="center"> <strong>{{ contact.name }} {{ contact.surname }}</strong> vel. "{{ contact.nickname }}"</p>
+        {% endfor %}
+    {% endblock %}
+
+{% endblock %}
