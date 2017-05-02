@@ -1,10 +1,27 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {{ form_start(form) }}  {# generuje tag otwierajacy form #}
-    <div align="center">
-    {{ form_widget(form) }} {# generuje inputy #}
-    <input type="submit" value="Add">
-    </div>
-    {{ form_end(form) }}    {# generuje tag zamykajacy form #}
+    <form action="{{ path("app_contact_createcontact") }}" method="POST">
+        <br>
+        <h3 align="center"> Please fill the form below to create new contact: </h3>
+        <br>
+        <div align="center"><label> Street: <input name="street" type="text"></label></div><br>
+        <div align="center"><label> Number: <input name="number" type="text"></label></div><br>
+        <div align="center"><label> City: <input name="city" type="text"></label></div><br>
+        <div align="center"><label> Contact: <select name="contact_id">
+                    {% for contact in contacts %}
+                        <option value="{{ contact.id }}"> {{ contact.name }}</option>
+                    {% endfor %}
+                    {# option value to to co bedziemy przesylac, a author name to co sie wyswietli #}
+                                            </select></label></div>
+        <div align="center"><input type="submit" value="Add"></div>
+    </form>
+
+
+    <p>
+    <form align="center" action="{{ path('app_general_welcome') }}">
+        <input type="submit" value="Main Page">
+    </form>
+    </p>
+
 {% endblock %}

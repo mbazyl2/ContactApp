@@ -101,4 +101,39 @@ class Contact
     {
         return $this->description;
     }
+
+    /**
+     * Add addresses
+     *
+     * @param \AppBundle\Entity\Address $addresses
+     * @return Contact
+     */
+    public function addAddress(\AppBundle\Entity\Address $addresses)
+    {
+        $this->addresses[] = $addresses;
+
+        return $this;
+    }
+
+    /**
+     * Remove addresses
+     *
+     * @param \AppBundle\Entity\Address $addresses
+     */
+    public function removeBook(\AppBundle\Entity\Address $addresses)
+    {
+        $this->addresses->removeElement($addresses);
+        // removeElement metoda, ktorej nie mam normalnie w php, usuwa po wartosci
+    }
+
+    /**
+     * Get addresses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBooks()
+    {
+        return $this->addresses;
+    }
+
 }

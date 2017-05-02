@@ -17,6 +17,12 @@
         <br>
     {% endblock%}
 
+    {% block button_add_new1 %}
+        <form align="center" action="{{ path('app_address_new') }}">
+            <input type="submit" value="Add new address"></form>
+        <br>
+    {% endblock%}
+
     {% block button_show_all %}
         <form align="center" action="{{ path('app_contact_showallcontacts') }}">
         <input type="submit" value="Show All contacts"></form>

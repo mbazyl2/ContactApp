@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Address;
+use AppBundle\Entity\Contact;
 use AppBundle\Form\AddressType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -23,13 +24,16 @@ class AddressController extends Controller
     public function newAction()
     {
         $address = new Address(); // tworzy nowy objekt adres klasy Address
-
+        $contacts = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
         // tworzenie formularza
 
         $form = $this->createForm(AddressType::class, $address,
             ["action"=> $this->generateUrl("app_address_create")]);
 
-        return ["form"=>$form->createView()];
+        return [
+                    "form" => $form->createView(),
+                    "contacts" =>  $contacts
+                ];
     }
 
     /**
@@ -38,25 +42,31 @@ class AddressController extends Controller
      */
     public function createAction(Request $request)
     {
-        $address = new Address();
-        $form = $this->createForm(AddressType::class, $address);
-        $form->handleRequest($request);
+        // w argumencie obiektu przekazujemy metode request aby z posta pobrac dane
+        $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")
+            ->find($request->request->get("contact_id"));
 
-        //linijka ponizej sprawdza czy formularz jest poprawnie wypelniony
-        // jesli walidacja nie jest ustalona to zawsze bedzie dobrze
-        // isSubmited czyli czy postem
-
-        if ($form->isSubmitted() && $form->isValid()){
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($address);
-            $em->flush();
-
-            return $this->redirectToRoute("app_general_welcome", ["id"=> $address->getId()]);
-
+        if(!$contact){
+            throw $this->createNotFoundException("Contact not found");
         }
 
-        return ["form"=> $form->createView()];
+
+        $address = new Address();
+
+        $address->setStreet($request->request->get('street'));
+        $address->setNumber($request->request->get('number'));
+        $address->setCity($request->request->get('city'));
+
+        $address->setContact($contact);
+        $contact->addBook($address);
+
+        $em = $this->getDoctrine()->getManager();
+        $em ->persist($book);
+        $em->flush();
+
+        return $this->redirectToRoute(
+            'app_general_welcome',
+            ['id' => $address->getId()]);
         }
 
     /**
