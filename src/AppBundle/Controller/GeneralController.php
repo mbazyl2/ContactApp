@@ -17,10 +17,11 @@ class GeneralController extends Controller
     public function welcomeAction()
     {
         $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
-
+        $address = $this->getDoctrine()->getRepository("AppBundle:Address")->findAll();
         return [
             "empty"=> "nic",
-            "contacts" => $contact
+            "contacts" => $contact,
+            "addresses" => $address
         ];
     }
 }

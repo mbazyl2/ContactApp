@@ -43,8 +43,7 @@ class ContactController extends Controller
     {
         $contact = new Contact();                                   // nowy obiekt $contact klasy Contact
         $contact->setName($request->request->get('name'));
-        $contact->setSurname($request->request->get("surname"));
-        $contact->setNickname($request->request->get("nickname"));
+        $contact->setDescription($request->request->get("description"));
         // nadanie nowemu obiektowi za pomoca setterow atrybutow przeslanych formularzem
 
 

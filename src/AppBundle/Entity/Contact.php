@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,17 +32,19 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="surname", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255)
      */
-    private $surname;
+    private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nickname", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Address", mappedBy="contact")
      */
-    private $nickname;
+    private $addresses;
 
+    public function __construct()
+    {
+     $this->addresses = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -77,48 +80,25 @@ class Contact
     }
 
     /**
-     * Set surname
+     * Set description
      *
-     * @param string $surname
+     * @param string $description
      * @return Contact
      */
-    public function setSurname($surname)
+    public function setDescription($description)
     {
-        $this->surname = $surname;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get surname
+     * Get description
      *
      * @return string 
      */
-    public function getSurname()
+    public function getDescription()
     {
-        return $this->surname;
-    }
-
-    /**
-     * Set nickname
-     *
-     * @param string $nickname
-     * @return Contact
-     */
-    public function setNickname($nickname)
-    {
-        $this->nickname = $nickname;
-
-        return $this;
-    }
-
-    /**
-     * Get nickname
-     *
-     * @return string 
-     */
-    public function getNickname()
-    {
-        return $this->nickname;
+        return $this->description;
     }
 }

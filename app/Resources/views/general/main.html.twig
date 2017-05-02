@@ -22,6 +22,11 @@
         <input type="submit" value="Show All contacts"></form>
     {% endblock%}
 
+    {% block button_show_all_addresses %}
+        <form align="center" action="{{ path('app_address_showall') }}">
+            <input type="submit" value="Show All addresses"></form>
+    {% endblock%}
+
 {% endblock %}
 
 {% block body %}

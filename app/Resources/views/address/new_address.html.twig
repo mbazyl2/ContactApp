@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ form_start(form) }}  {# generuje tag otwierajacy form #}
+    <div align="center">
+    {{ form_widget(form) }} {# generuje inputy #}
+    <input type="submit" value="Add">
+    </div>
+    {{ form_end(form) }}    {# generuje tag zamykajacy form #}
+{% endblock %}

@@ -1,10 +1,14 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1 align="center">{{ contact.name }} {{ contact.surname }}</h1>
-        <p align="center">{{ contact.nickname }}</p>
+    <h1 align="center">{{ contact.name }}</h1>
+        <p align="center">{{ contact.description }}</p>
 
     <p>
+    <form align="center" action="{{ path('app_contact_deletecontact', {"id":contact.id}) }}" method="POST">
+        <input name="_method" type="hidden" value="DELETE">
+        <input style="background-color: #C82829" type="submit" value="Delete">
+    </form>
         <br>
     <form align="center" action="{{ path('app_general_welcome') }}">
         <input style="background-color: cadetblue; font-weight: bold" type="submit" value="Main Page">

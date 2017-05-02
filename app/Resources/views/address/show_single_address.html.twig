@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1 align="center"> </h1>
+        <p align="center">{{ address.street }} {{ address.number }}, City : {{ address.city }}</p>
+
+
+    <p>
+        <br>
+    <form align="center" action="{{ path('app_general_welcome') }}">
+        <input style="background-color: cadetblue; font-weight: bold" type="submit" value="Main Page">
+    </form>
+    </p>
+{% endblock %}
+
+

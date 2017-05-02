@@ -2,27 +2,25 @@
 
 
 {% block body %}
-    <h2 align="center"> List of all Your contacts :</h2>
+    <h2 align="center"> List of all Your addresses :</h2>
     <br>
     <br>
-    {% for contact in contacts %}
-       {#<p align="center"> _*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_ </p> #}
-        <p align="center"> ________________________________ </p>
-        <h3 align="center">{{ contact.name }} </h3>
+    {% for address in addresses %}
+        <p align="center"> ______________________________ </p>
         <p align="center">
-            {{ contact.description }}
+            {{ address.street }} {{ address.number }}, city: {{ address.city }}
         </p>
 
             <div>
                 <span>
-                    <form align="center" action="{{ path('app_contact_deletecontact', {"id":contact.id}) }}" method="POST">
+                    <form align="center" action="{{ path('app_address_delete', {"id":address.id}) }}" method="POST">
                         <input name="_method" type="hidden" value="DELETE">
                         <input style="background-color: #C82829" type="submit" value="Delete">
                      </form>
                </span>
                <span>
-                    <form align="center" action="{{ path("app_contact_showsinglecontact", {"id":contact.id}) }}">
-                        <input style="background-color: #ffcc00" type="submit" value="Show contact details">
+                    <form align="center" action="{{ path("app_address_showone", {"id":address.id}) }}">
+                        <input style="background-color: #ffcc00" type="submit" value="Show address details">
                     </form>
                 </span>
         </div>
