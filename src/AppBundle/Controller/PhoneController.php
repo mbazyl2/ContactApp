@@ -45,24 +45,24 @@ class PhoneController extends Controller
 
         $phone = new Phone();
 
-        $phone->setPhone($request->request->get('street'));
-        $phone->setDescription($request->request->get('number'));
+        $phone->setPhone($request->request->get('phone'));
+        $phone->setDescription($request->request->get('description'));
 
         $phone->setContact($contact);
-        $contact->addAddress($phone);
+        $contact->addPhones($phone);
 
         $em = $this->getDoctrine()->getManager();
-        $em ->persist($address);
+        $em ->persist($phone);
         $em->flush();
 
         return $this->redirectToRoute(
             'app_general_welcome',
-            ['id' => $address->getId()]);
+            ['id' => $phone->getId()]);
     }
 
     /**
      * @Route("/show/{id}")
-     * @Template(":address:show_single_address.html.twig")
+     * @Template(":phone:show_single_phone.html.twig")
      */
     public function showOneAction($id)
     {
@@ -75,7 +75,7 @@ class PhoneController extends Controller
 
     /**
      * @Route("/showAll/")
-     * @Template(":address:show_all_adresses.html.twig")
+     * @Template("phone/show_all_phones.html.twig")
      */
     public function showAllAction()     //akcja wyswietlajaca wszystkie adresy
     {
@@ -99,7 +99,7 @@ class PhoneController extends Controller
         $em->remove($phone);
         $em->flush();
 
-        return $this->redirectToRoute("app_address_showall");
+        return $this->redirectToRoute("app_phone_showall");
 
     }
 }

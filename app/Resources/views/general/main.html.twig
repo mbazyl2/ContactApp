@@ -19,6 +19,10 @@
     {% block button_add_new1 %}
         <form align="center" action="{{ path('app_address_new') }}">
             <input type="submit" value="Add new address"></form>
+    {% endblock%}
+    {% block button_add_new2 %}
+        <form align="center" action="{{ path('app_phone_new') }}">
+            <input type="submit" value="Add new phone"></form>
         <br>
     {% endblock%}
 
