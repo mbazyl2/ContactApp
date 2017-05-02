@@ -120,7 +120,7 @@ class Contact
      *
      * @param \AppBundle\Entity\Address $addresses
      */
-    public function removeBook(\AppBundle\Entity\Address $addresses)
+    public function removeAddress(\AppBundle\Entity\Address $addresses)
     {
         $this->addresses->removeElement($addresses);
         // removeElement metoda, ktorej nie mam normalnie w php, usuwa po wartosci
@@ -131,7 +131,7 @@ class Contact
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBooks()
+    public function getAddresses()
     {
         return $this->addresses;
     }

@@ -3,7 +3,10 @@
 {% block body %}
     <h1 align="center"> </h1>
         <p align="center">{{ address.street }} {{ address.number }}, City : {{ address.city }}</p>
-
+    <form align="center" action="{{ path('app_address_delete', {"id":address.id}) }}" method="POST">
+        <input name="_method" type="hidden" value="DELETE">
+        <input style="background-color: #C82829" type="submit" value="Delete">
+    </form>
 
     <p>
         <br>

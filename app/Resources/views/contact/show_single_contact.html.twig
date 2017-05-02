@@ -10,6 +10,21 @@
         <input style="background-color: #C82829" type="submit" value="Delete">
     </form>
         <br>
+    <div align="center">
+       <h3> Addresses: </h3>
+                 <ul style="list-style-position: inside">
+        {% for address in contact.addresses %}
+            <li>
+                    {{ address.street }} {{ address.number }}, {{ address.city }}
+                <form action="{{ path('app_address_delete', {"id":address.id}) }}" method="POST">
+                    <input name="_method" type="hidden" value="DELETE">
+                    <input style="background-color: #C82829" type="submit" value="Delete">
+                </form>
+                <br>
+            </li>
+        {% endfor %}
+                 </ul>
+    </div>
     <form align="center" action="{{ path('app_general_welcome') }}">
         <input style="background-color: cadetblue; font-weight: bold" type="submit" value="Main Page">
     </form>

@@ -20,25 +20,21 @@ class AddressController extends Controller
     /**
      * @Route("/new")
      * @Template(":address:new_address.html.twig")
+     * @Method("GET")
      */
     public function newAction()
     {
-        $address = new Address(); // tworzy nowy objekt adres klasy Address
-        $contacts = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
-        // tworzenie formularza
 
-        $form = $this->createForm(AddressType::class, $address,
-            ["action"=> $this->generateUrl("app_address_create")]);
+        $contacts = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
 
         return [
-                    "form" => $form->createView(),
                     "contacts" =>  $contacts
                 ];
     }
 
     /**
      * @Route("/create")
-     * @Template(":address:new_address.html.twig")
+     * @Method("POST")
      */
     public function createAction(Request $request)
     {
@@ -58,10 +54,10 @@ class AddressController extends Controller
         $address->setCity($request->request->get('city'));
 
         $address->setContact($contact);
-        $contact->addBook($address);
+        $contact->addAddress($address);
 
         $em = $this->getDoctrine()->getManager();
-        $em ->persist($book);
+        $em ->persist($address);
         $em->flush();
 
         return $this->redirectToRoute(
