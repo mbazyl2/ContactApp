@@ -23,7 +23,11 @@
     {% block button_add_new2 %}
         <form align="center" action="{{ path('app_phone_new') }}">
             <input type="submit" value="Add new phone"></form>
-        <br>
+    {% endblock%}
+    {% block button_add_new3 %}
+        <form align="center" action="{{ path('app_mail_new') }}">
+            <input type="submit" value="Add new mail"></form>
+        <br>   <br>
     {% endblock%}
 
     {% block button_show_all %}
@@ -39,6 +43,10 @@
     {% block button_show_all_phones %}
         <form align="center" action="{{ path('app_phone_showall') }}">
             <input type="submit" value="Show All phones"></form>
+    {% endblock%}
+    {% block button_show_all_mails %}
+        <form align="center" action="{{ path('app_mail_showall') }}">
+            <input type="submit" value="Show All mails"></form>
     {% endblock%}
 
 {% endblock %}

@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <form action="{{ path("app_phone_create") }}" method="POST">
+    <form action="{{ path("app_mail_create") }}" method="POST">
         <br>
-        <h3 align="center"> Please fill the form below to create new contact: </h3>
+        <h3 align="center"> Please fill the form below to add new mail: </h3>
         <br>
-        <div align="center"><label> Phone: <input name="phone" type="text"></label></div><br>
+        <div align="center"><label> Mail: <input name="mail" type="text"></label></div><br>
         <div align="center"><label> Description: <input name="description" type="text"></label></div><br>
         <div align="center"><label> Contact: <select name="contact_id">
                     {% for contact in contacts %}

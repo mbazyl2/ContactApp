@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Mail;
-use AppBundle\Entity\Phone;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/mail")
  */
-class MailControllerController extends Controller
+class MailController extends Controller
 {
 
     /**
@@ -100,7 +99,7 @@ class MailControllerController extends Controller
         $em->remove($mail);
         $em->flush();
 
-        return $this->redirectToRoute("app_mailcontroller_showall");
+        return $this->redirectToRoute("app_mail_showall");
 
     }
 }
