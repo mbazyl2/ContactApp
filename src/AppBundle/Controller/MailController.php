@@ -102,4 +102,56 @@ class MailController extends Controller
         return $this->redirectToRoute("app_mail_showall");
 
     }
+
+    /**
+     * @Route("/load/{id}")
+     * @Method("POST")
+     * @Template("mail/update.html.twig")
+     */
+    public function loadAction($id)
+    {
+        $contacts = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
+        $mail = $this->getDoctrine()->getRepository("AppBundle:Mail")->find($id);
+        if(!$mail){
+            throw $this->createNotFoundException("Mail with id $id does not exists");
+        }
+
+
+        return ["mail"=>$mail,
+            "contacts" =>  $contacts];
+    }
+    /**
+     * @Route("/update/{id}")
+     * @Method("POST")
+     */
+    public function updateAction(Request $request, $id)
+    {
+
+        $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")
+            ->find($request->request->get("contact_id"));
+
+        $contacts = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
+
+        if(!$contact){
+            throw $this->createNotFoundException("Contact not found");
+        }
+        $mail = $this->getDoctrine()->getRepository("AppBundle:Mail")->find($id);
+        if(!$mail){
+            throw $this->createNotFoundException("Mail with id $id does not exists");
+        }
+        $mail->setPhone($request->request->get('mail'));
+        $mail->setDescription($request->request->get('description'));
+
+        $mail->setContact($contact);
+        $contact->addPhones($mail);
+
+        $em = $this->getDoctrine()->getManager();
+        $em ->persist($mail);
+        $em->flush();
+
+        return $this->redirectToRoute(
+            'app_mail_showall',
+            ['id' => $mail->getId(),
+                "contacts" =>  $contacts]);
+    }
 }

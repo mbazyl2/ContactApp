@@ -52,6 +52,9 @@
             {% for mail in contact.mails %}
                 <li>
                     {{ mail.mail }} {{ mail.description }}
+                    <form align="center" action="{{ path('app_mail_load', {"id":mail.id}) }}" method="POST">
+                        <input style="background-color: #FFCC00" type="submit" value="Update">
+                    </form>
                     <form action="{{ path('app_mail_delete', {"id":mail.id}) }}" method="POST">
                         <input name="_method" type="hidden" value="DELETE">
                         <input style="background-color: #C82829" type="submit" value="Delete">
