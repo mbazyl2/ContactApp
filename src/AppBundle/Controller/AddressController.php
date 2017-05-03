@@ -107,4 +107,58 @@ class AddressController extends Controller
         return $this->redirectToRoute("app_address_showall");
 
     }
+    /**
+     * @Route("/load/{id}")
+     * @Method("POST")
+     * @Template("address/update.html.twig")
+     */
+    public function loadAction($id)
+    {
+        $contacts = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
+        $address = $this->getDoctrine()->getRepository("AppBundle:Address")->find($id);
+        if(!$address){
+            throw $this->createNotFoundException("Address with id $id does not exists");
+        }
+
+
+        return ["address"=>$address,
+            "contacts" =>  $contacts];
+    }
+    /**
+     * @Route("/update/{id}")
+     * @Method("POST")
+     */
+    public function updateAction(Request $request, $id)
+    {
+
+        // w argumencie obiektu przekazujemy metode request aby z posta pobrac dane
+        $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")
+            ->find($request->request->get("contact_id"));
+
+        $contacts = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
+
+        if(!$contact){
+            throw $this->createNotFoundException("Contact not found");
+        }
+        $address = $this->getDoctrine()->getRepository("AppBundle:Address")->find($id);
+        if(!$address){
+            throw $this->createNotFoundException("Address with id $id does not exists");
+        }
+        $address->setStreet($request->request->get('street'));
+        $address->setNumber($request->request->get('number'));
+        $address->setCity($request->request->get('city'));
+
+        $address->setContact($contact);
+        $contact->addAddress($address);
+
+        $em = $this->getDoctrine()->getManager();
+        $em ->persist($address);
+        $em->flush();
+
+        return $this->redirectToRoute(
+            'app_address_showall',
+            ['id' => $address->getId(),
+                "contacts" =>  $contacts]);
+    }
+
 }

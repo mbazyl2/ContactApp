@@ -7,6 +7,9 @@
         <input name="_method" type="hidden" value="DELETE">
         <input style="background-color: #C82829" type="submit" value="Delete">
     </form>
+    <form align="center" action="{{ path('app_address_load', {"id":address.id}) }}" method="POST">
+        <input style="background-color: #FFCC00" type="submit" value="Update">
+    </form>
 
     <p>
         <br>
