@@ -16,6 +16,9 @@
         {% for address in contact.addresses %}
             <li>
                     {{ address.street }} {{ address.number }}, {{ address.city }}
+                <form align="center" action="{{ path('app_address_load', {"id":address.id}) }}" method="POST">
+                    <input style="background-color: #FFCC00" type="submit" value="Update">
+                </form>
                 <form action="{{ path('app_address_delete', {"id":address.id}) }}" method="POST">
                     <input name="_method" type="hidden" value="DELETE">
                     <input style="background-color: #C82829" type="submit" value="Delete">

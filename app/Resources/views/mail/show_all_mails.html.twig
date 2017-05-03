@@ -2,30 +2,31 @@
 
 
 {% block body %}
-    <h2 align="center"> List of all Your addresses :</h2>
+    <h2 align="center"> List of all Your Phones :</h2>
+
     <br>
-    {% block button_add_new1 %}
-        <form align="center" action="{{ path('app_address_new') }}">
-            <input type="submit" value="Add new address"></form>
+    {% block button_add_new2 %}
+        <form align="center" action="{{ path('app_phone_new') }}">
+            <input type="submit" value="Add new phone"></form>
+        <br>
     {% endblock%}
     <br>
-    {% for address in addresses %}
+    {% for phone in phones %}
         <p align="center"> ______________________________ </p>
         <p align="center">
-            {{ address.street }} {{ address.number }}, city: {{ address.city }}
+            {{ phone.phone }} {{ phone.description }}
         </p>
 
             <div>
-
                 <span>
-                    <form align="center" action="{{ path('app_address_delete', {"id":address.id}) }}" method="POST">
+                    <form align="center" action="{{ path('app_phone_delete', {"id":phone.id}) }}" method="POST">
                         <input name="_method" type="hidden" value="DELETE">
                         <input style="background-color: #C82829" type="submit" value="Delete">
                      </form>
                </span>
                <span>
-                    <form align="center" action="{{ path("app_address_showone", {"id":address.id}) }}">
-                        <input style="background-color: #ffcc00" type="submit" value="Show address details">
+                    <form align="center" action="{{ path("app_phone_showone", {"id":phone.id}) }}">
+                        <input style="background-color: #ffcc00" type="submit" value="Show phone details">
                     </form>
                 </span>
         </div>
