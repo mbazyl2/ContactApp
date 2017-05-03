@@ -107,6 +107,7 @@ class AddressController extends Controller
         return $this->redirectToRoute("app_address_showall");
 
     }
+
     /**
      * @Route("/load/{id}")
      * @Method("POST")

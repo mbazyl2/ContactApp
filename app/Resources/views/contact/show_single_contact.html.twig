@@ -34,6 +34,9 @@
             {% for phone in contact.phones %}
                 <li>
                     {{ phone.phone }} {{ phone.description }}
+                    <form align="center" action="{{ path('app_phone_load', {"id":phone.id}) }}" method="POST">
+                        <input style="background-color: #FFCC00" type="submit" value="Update">
+                    </form>
                     <form action="{{ path('app_phone_delete', {"id":phone.id}) }}" method="POST">
                         <input name="_method" type="hidden" value="DELETE">
                         <input style="background-color: #C82829" type="submit" value="Delete">

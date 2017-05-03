@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <form action="{{ path("app_phone_update", {"id":phone.id}) }}" method="POST">
+        <br>
+        <h3 align="center"> Please correct the form below to update contact: </h3>
+        <br>
+        <div align="center"><label> Phone: <input name="phone" type="text" value="{{ phone.phone }}"></label></div><br>
+        <div align="center"><label> Description: <input name="description" type="text" value="{{ phone.description }}"></label></div><br>
+        <div align="center"><label> Contact: <select name="contact_id">
+                    {% for contact in contacts %}
+                        <option value="{{ contact.id }}"> {{ contact.name }}</option>
+                    {% endfor %}
+                    {# option value to to co bedziemy przesylac, a author name to co sie wyswietli #}
+                </select></label></div>
+        <div align="center"><input type="submit" value="Update"></div>
+    </form>
+
+
+    <p>
+    <form align="center" action="{{ path('app_general_welcome') }}">
+        <input type="submit" value="Main Page">
+    </form>
+    </p>
+
+{% endblock %}

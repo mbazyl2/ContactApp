@@ -102,4 +102,57 @@ class PhoneController extends Controller
         return $this->redirectToRoute("app_phone_showall");
 
     }
+
+
+    /**
+     * @Route("/load/{id}")
+     * @Method("POST")
+     * @Template("phone/update.html.twig")
+     */
+    public function loadAction($id)
+    {
+        $contacts = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
+        $phone = $this->getDoctrine()->getRepository("AppBundle:Phone")->find($id);
+        if(!$phone){
+            throw $this->createNotFoundException("Phone with id $id does not exists");
+        }
+
+
+        return ["phone"=>$phone,
+            "contacts" =>  $contacts];
+    }
+    /**
+     * @Route("/update/{id}")
+     * @Method("POST")
+     */
+    public function updateAction(Request $request, $id)
+    {
+
+        $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")
+            ->find($request->request->get("contact_id"));
+
+        $contacts = $this->getDoctrine()->getRepository("AppBundle:Contact")->findAll();
+
+        if(!$contact){
+            throw $this->createNotFoundException("Contact not found");
+        }
+        $phone = $this->getDoctrine()->getRepository("AppBundle:Phone")->find($id);
+        if(!$phone){
+            throw $this->createNotFoundException("Address with id $id does not exists");
+        }
+        $phone->setPhone($request->request->get('phone'));
+        $phone->setDescription($request->request->get('description'));
+
+        $phone->setContact($contact);
+        $contact->addPhones($phone);
+
+        $em = $this->getDoctrine()->getManager();
+        $em ->persist($phone);
+        $em->flush();
+
+        return $this->redirectToRoute(
+            'app_phone_showall',
+            ['id' => $phone->getId(),
+                "contacts" =>  $contacts]);
+    }
 }
