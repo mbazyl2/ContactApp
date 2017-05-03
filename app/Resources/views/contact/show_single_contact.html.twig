@@ -25,6 +25,21 @@
         {% endfor %}
                  </ul>
     </div>
+    <div align="center">
+        <h3> Phones: </h3>
+        <ul style="list-style-position: inside">
+            {% for phone in contact.phones %}
+                <li>
+                    {{ phone.phone }} {{ phone.description }}
+                    <form action="{{ path('app_phone_delete', {"id":phone.id}) }}" method="POST">
+                        <input name="_method" type="hidden" value="DELETE">
+                        <input style="background-color: #C82829" type="submit" value="Delete">
+                    </form>
+                    <br>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
     <form align="center" action="{{ path('app_general_welcome') }}">
         <input style="background-color: cadetblue; font-weight: bold" type="submit" value="Main Page">
     </form>

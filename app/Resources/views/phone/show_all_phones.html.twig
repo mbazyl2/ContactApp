@@ -3,7 +3,13 @@
 
 {% block body %}
     <h2 align="center"> List of all Your Phones :</h2>
+
     <br>
+    {% block button_add_new2 %}
+        <form align="center" action="{{ path('app_phone_new') }}">
+            <input type="submit" value="Add new phone"></form>
+        <br>
+    {% endblock%}
     <br>
     {% for phone in phones %}
         <p align="center"> ______________________________ </p>
